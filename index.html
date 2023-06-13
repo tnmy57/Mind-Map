@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mind Map</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Mind Map</h1>
+<div class="whole">
+  <div id="canvas-container">
+    <canvas id="canvas" width="1000" height="500"></canvas>
+  </div>
+  <div id="controls">
+    <div id="con1">
+      <label for="node-label">TITLE</label>
+      <input type="text" id="node-label" placeholder="Enter the title">
+    </div>
+    <div id="con2">
+      <label for="predecessor">PREDECESSOR</label>
+      <select id="predecessor">
+        <option value="">None</option>
+      </select>
+    </div>
+    <div id="butt">
+    <button id="add-node-btn" class="btn">Add Node</button>
+    <button id="clear-btn" class="btn">Clear Canvas</button>
+    </div>
+    <button id="download-btn" class="btn">Download</button>
+    
+  </div>
+</div>
+  <script src="script.js"></script>
+  <script>
+    // Function to download the canvas as a PNG file
+    function downloadCanvas() {
+      // Create a temporary canvas with white background
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = canvas.width;
+      tempCanvas.height = canvas.height;
+      const tempContext = tempCanvas.getContext('2d');
+      tempContext.fillStyle = '#ffffff'; // White background
+      tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+      // Draw the original canvas onto the temporary canvas
+      tempContext.drawImage(canvas, 0, 0);
+
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = tempCanvas.toDataURL(); // Convert temporary canvas to data URL
+      link.download = 'mind_map.png'; // Set the download filename
+
+      // Simulate a click on the link element to trigger the download
+      link.click();
+    }
+
+    // Event listener for "Download Canvas" button click
+    const downloadBtn = document.getElementById('download-btn');
+    downloadBtn.addEventListener('click', downloadCanvas);
+  </script>
+</body>
+</html>
